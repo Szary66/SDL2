@@ -8,59 +8,83 @@ namespace SDL2{
 		/*Manager to Window class*/
 		struct Window{
 			/*Getter window flags
-			*@param SDL2::Display::Window& window to information
+			*@param const SDL2::Display::Window& window to information
 			*@return Uint32 flags*/
-			Uint32 static flag(Display::Window&);
+			Uint32 static inline flag(const Display::Window& window){
+				return SDL_GetWindowFlags(window.get());
+			}
 
 			/*Hide window
 			*@param SDL2::Display::Window& window to information*/
-			void static hide(Display::Window&);
+			void static inline hide(const Display::Window& window){
+				SDL_HideWindow(window.get());
+			}
 
 			/*Show window
-			*@param SDL2::Display::Window& window to information*/
-			void static show(Display::Window&);
+			*@param const SDL2::Display::Window& window to information*/
+			void static inline show(const Display::Window& window){
+				SDL_ShowWindow(window.get());
+			}
 
 			/*Raise window above other windows and set the input focus
-			*@param SDL2::Display::Window& window to information*/
-			void static raise(Display::Window&);
+			*@param const SDL2::Display::Window& window to information*/
+			void static inline raise(const Display::Window& window){
+				SDL_RaiseWindow(window.get());
+			}
 
 			/*Make a window as large as possible
-			*@param SDL2::Display::Window& window to information*/
-			void static maximum(Display::Window&);
+			*@param const SDL2::Display::Window& window to information*/
+			void static inline maximum(const Display::Window& window){
+				SDL_MaximizeWindow(window.get());
+			}
 
 			/*Make a window to iconic
-			*@param SDL2::Display::Window& window to information*/
-			void static minimum(Display::Window&);
+			*@param const SDL2::Display::Window& window to information*/
+			void static inline minimum(const Display::Window& window){
+				SDL_MinimizeWindow(window.get());
+			}
 
 			/*Restore window size and possition to manimized or minimized window
-			*@param SDL2::Display::Window& window to information*/
-			void static  restore(Display::Window&);
+			*@param const SDL2::Display::Window& window to information*/
+			void static inline restore(const Display::Window& window){
+				SDL_RestoreWindow(window.get());
+			}
 
 			/*Set a window on fullscreen
-			*@param SDL2::Display::Window& window to information
+			*@param const SDL2::Display::Window& window to information
 			*@param Uint32 SDL_WindowFlag to fullscreen*/
-			void static fullscreen(Display::Window&, Uint32 = SDL_WINDOW_FULLSCREEN_DESKTOP);
+			void static inline fullscreen(const Display::Window& window, Uint32 flag){
+				SDL_SetWindowFullscreen(window.get(), flag);
+			}
 
 			/*Fill in information about the display mode used when a fullscreen
-			*@param SDL2::Display::Window& window to information
+			*@param const SDL2::Display::Window& window to information
 			*@param SDL_DisplayMode* the get information*/
-			int static getDisplayMode(Display::Window&, SDL_DisplayMode*);
+			int static inline getDisplayMode(const Display::Window& window, SDL_DisplayMode* mode){
+				return SDL_GetWindowDisplayMode(window.get(), mode);
+			}
 
 			/*Set the display mode used then a fullscreen windowis visible
-			*@param SDL2::Display::Window& window to information
+			*@param const SDL2::Display::Window& window to information
 			*@param const SDL_DisplayMode* mode to use or nullptr fo default mode
 			*@return true on succes or false if setting the disply mode failed*/
-			bool static setDisplayMode(Display::Window&, const SDL_DisplayMode*);
+			bool static inline setDisplayMode(const Display::Window& window, const SDL_DisplayMode* mode){
+				return !SDL_SetWindowDisplayMode(window.get(), mode);
+			}
 
 			/*Set a window's input grab mode
-			*@param SDL2::Display::Window& window to information
+			*@param const SDL2::Display::Window& window to information
 			*@SDL_bool true to gram input or false to release*/
-			void static setGrab(Display::Window&, SDL_bool);
+			void static inline setGrab(const Display::Window& window, SDL_bool grabbed){
+				SDL_SetWindowGrab(window.get(), grabbed);
+			}
 
 			/*Get a window's input grab mode
-			*@param SDL2::Display::Window& window to information
+			*@param const SDL2::Display::Window& window to information
 			*@return SDL_bool true if input is grabbed or false otherwise*/
-			SDL_bool static getGrab(Display::Window&);
+			SDL_bool static getGrab(const Display::Window& window){
+				return SDL_GetWindowGrab(window.get());
+			}
 		};
 	}
 }

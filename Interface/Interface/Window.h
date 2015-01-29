@@ -43,18 +43,19 @@ namespace SDL2{
 
 			/*SDL_Window getter
 			*@return SDL_Window**/
-			SDL_Window* get()const{
+			inline SDL_Window* get()const{
 				return _window;
 			}
 
 			/*Width getter
 			*@return size_t width window*/
-			size_t width()const{
+			inline size_t width()const{
 				return _width;
 			}
+			
 			/*Height getter
 			*@return size_t height window*/
-			size_t height()const{
+			inline size_t height()const{
 				return _height;
 			}
 		private:
