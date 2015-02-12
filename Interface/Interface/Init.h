@@ -6,7 +6,7 @@ namespace SDL2{
 	*@param Uint32 flag to initcialize
 	*@return bool true if initcialized or false if can't*/
 	bool inline init(Uint32 flag){
-		return !SDL_Init(flag);
+		return SDL_Init(flag);
 	}
 
 	/*Inicjalize the subSystem SDL2

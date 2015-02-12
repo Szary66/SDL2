@@ -1,5 +1,5 @@
 #pragma once
-#include <string>
+#include <string>zz
 #include "SDL.h"
 
 /*Interfame to SDL2 engine*/
@@ -43,7 +43,7 @@ namespace SDL2{
 
 			/*SDL_Window getter
 			*@return SDL_Window**/
-			inline SDL_Window* get()const{
+			inline SDL_Window* const get()const{
 				return _window;
 			}
 
