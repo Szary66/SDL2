@@ -1,5 +1,6 @@
 #pragma once
-#include <string>zz
+#include <string>
+#include <iostream>
 #include "SDL.h"
 
 /*Interfame to SDL2 engine*/
@@ -12,15 +13,8 @@ namespace SDL2{
 			/*Delete the copy construktors*/
 			Window(const Window&) = delete;
 			Window(Window&) = delete;
-			/*Set SDL_Window on nullptr*/
-			Window()
-				:_window(nullptr){};
-			/*Destroy window*/
-			~Window(){
-				SDL_DestroyWindow(_window);
-			}
-
-			/*Create window
+	
+			/*Constructor: create window
 			*@param const char* to name window
 			*@param Uint32 width window
 			*@param UINT32 height window
@@ -28,21 +22,28 @@ namespace SDL2{
 			*@param Uint32 y to left up corner
 			*@param Uint32 SDL_WindowFlag
 			*@return bool true if created successful or false if was fail*/
-			bool create(const char* name, Uint32 w, Uint32 h, Uint32 x = SDL_WINDOWPOS_UNDEFINED, Uint32 y = SDL_WINDOWPOS_UNDEFINED, Uint32 flag = SDL_WINDOW_SHOWN){
-				_width = w;	_height = h;
-				return _window = SDL_CreateWindow(name, x, y, w, h, flag);
+			Window(const char* name, Uint32 w, Uint32 h, Uint32 x = SDL_WINDOWPOS_UNDEFINED, Uint32 y = SDL_WINDOWPOS_UNDEFINED, Uint32 flag = SDL_WINDOW_SHOWN)
+				:_width(w), _height(h), _window(nullptr){
+				if(!(_window = SDL_CreateWindow(name, x, y, w, h, flag)))
+					std::cout << "Window create error: " << SDL_GetError() << std::endl;
 			};
 
-			/*Create window of fullcreen
+			/*Constructor: create window of fullcreen
 			*@param const char* to name window
 			*@param Uint32 SDL_WindowFlag
 			*@return bool true if created successful or false if was fail*/
-			bool create(const char* name, Uint32 flag = SDL_WINDOW_FULLSCREEN_DESKTOP){
-				return _window = SDL_CreateWindow(name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 0, 0, flag);
+			Window(const char* name, Uint32 flag = SDL_WINDOW_FULLSCREEN_DESKTOP){
+				if(!(_window = SDL_CreateWindow(name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 0, 0, flag)))
+					std::cout << "Window create error: " << SDL_GetError() << std::endl;
+			}
+
+			/*Destroy window*/
+			~Window(){
+				SDL_DestroyWindow(_window);
 			}
 
 			/*SDL_Window getter
-			*@return SDL_Window**/
+			*@return SDL_Window* */
 			inline SDL_Window* const get()const{
 				return _window;
 			}
@@ -52,7 +53,7 @@ namespace SDL2{
 			inline size_t width()const{
 				return _width;
 			}
-			
+
 			/*Height getter
 			*@return size_t height window*/
 			inline size_t height()const{
