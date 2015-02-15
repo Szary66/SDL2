@@ -42,11 +42,4 @@ namespace SDL2{
 	void inline quitSubSystem(Uint32 flag){
 		SDL_QuitSubSystem(flag);
 	}
-
-	/*Initialize and launch an SDL/WinRT application
-	*@param
-	*@param*/
-	/*void inline winRTRunApp(){
-		SDL_WinRTRunApp
-	}*/
 }
