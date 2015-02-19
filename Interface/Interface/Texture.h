@@ -22,7 +22,7 @@ namespace SDL2{
 			Source(Source&&) = delete;
 
 			/*Load *.BMP and create texture from surface*/
-			Source(const std::string& path, const Display::Renderer& renderer){
+			Source(const std::string& path, Display::Renderer& renderer){
 				if(!(_surface = SDL_LoadBMP(path.c_str()))){
 					std::cout << "Error with load SDL_Surface (BMP): " << SDL_GetError() << std::endl;
 					return;
@@ -35,7 +35,7 @@ namespace SDL2{
 			}
 
 			/*Load images and create texture from surface*/
-			Source(const std::string& path, const Display::Renderer& renderer, bool img){
+			Source(const std::string& path, Display::Renderer& renderer, bool img){
 				if(!(_surface = IMG_Load(path.c_str()))){
 					std::cout << "Error with load SDL_Surface (IMG): " << SDL_GetError() << std::endl;
 					return;
