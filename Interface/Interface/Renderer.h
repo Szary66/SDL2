@@ -1,8 +1,8 @@
 #pragma once
-#include <memory>z
 #include "SDL_render.h"
 #include "SDL_rect.h"
 #include "Window.h"
+#include "Texture.h"
 
 /*Interfame to SDL2 engine*/
 namespace SDL2{
@@ -34,13 +34,18 @@ namespace SDL2{
 				return _renderer;
 			}
 
-			bool inline copy(SDL_Texture* texture, SDL_Rect* rTexture, SDL_Rect* rSprite){
-				return !SDL_RenderCopy(_renderer, texture, rTexture, rSprite);
+			bool inline copy(const Graphic::Sprite& sprite){
+				return !SDL_RenderCopy(_renderer, sprite.texture(), &sprite.rectSource, &sprite.rectShowed);
 			}
 
-			bool inline copyEx(SDL_Texture* texture, const SDL_Rect* rTexture, const SDL_Rect* rSprite, const SDL_Point* center, const SDL_RendererFlip flip, const double angle){
-				return !SDL_RenderCopyEx(_renderer, texture, rTexture, rSprite, angle, center, flip);
+			/*bool inline copy(const Graphic::Text& sprite){
+				return !SDL_RenderCopy(_renderer, sprite.texture(), nullptr, &sprite.rect);
+			}*/
+
+			bool inline copyEx(const Graphic::Sprite& sprite, const SDL_Point* center, const SDL_RendererFlip flip, const double angle){
+				return !SDL_RenderCopyEx(_renderer, sprite.texture(), &sprite.rectSource, &sprite.rectShowed, angle, center, flip);
 			}
+
 			/*Clear buffor renderer
 			*@return bool true if succes cleared or false if not*/
 			bool inline clear(){
