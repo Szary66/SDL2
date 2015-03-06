@@ -1,5 +1,5 @@
 #pragma once
-#include "SDL.h"
+#include <SDL.h>
 /*Interfame to SDL2 engine*/
 namespace SDL2{
 	/*Inicjalize the SDL2 

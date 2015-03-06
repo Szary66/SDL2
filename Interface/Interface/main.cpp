@@ -1,4 +1,4 @@
-#include "SDL_ttf.h"
+#include <SDL_ttf.h>
 #include <cstdlib>
 #include "Init.h"
 #include "Renderer.h"

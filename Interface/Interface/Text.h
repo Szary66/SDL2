@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include "Color.h"
 #include "SDL_ttf.h"
 #include "SDL_image.h"
 #include "Renderer.h"
